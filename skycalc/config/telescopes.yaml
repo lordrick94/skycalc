@@ -1,0 +1,237 @@
+# Telescope configurations for SkyCalc
+# Add your custom telescopes here or create a separate YAML file
+
+telescopes:
+  # ============================================================================
+  # Mauna Kea Observatories (Hawaii)
+  # ============================================================================
+
+  keck:
+    name: "W. M. Keck Observatory"
+    latitude: 19.8263
+    longitude: -155.4783
+    elevation: 4145
+    timezone: "US/Hawaii"
+    description: "Keck I and II 10m telescopes"
+    limits:
+      min_altitude: 33.3  # Nasmyth platform limit
+      max_altitude: 89.0
+      min_hour_angle: -5.3
+      max_hour_angle: 5.3
+
+  gemini_north:
+    name: "Gemini North"
+    latitude: 19.8238
+    longitude: -155.4690
+    elevation: 4213
+    timezone: "US/Hawaii"
+    description: "Gemini 8.1m telescope"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 85.0
+      min_hour_angle: -5.5
+      max_hour_angle: 5.5
+
+  subaru:
+    name: "Subaru Telescope"
+    latitude: 19.8255
+    longitude: -155.4761
+    elevation: 4163
+    timezone: "US/Hawaii"
+    description: "NAOJ 8.2m telescope"
+    limits:
+      min_altitude: 15.0
+      max_altitude: 89.5
+      min_hour_angle: -6.0
+      max_hour_angle: 6.0
+
+  cfht:
+    name: "Canada-France-Hawaii Telescope"
+    latitude: 19.8252
+    longitude: -155.4686
+    elevation: 4204
+    timezone: "US/Hawaii"
+    description: "CFHT 3.6m telescope"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 87.0
+
+  # ============================================================================
+  # Chile Observatories
+  # ============================================================================
+
+  vlt:
+    name: "Very Large Telescope (Paranal)"
+    latitude: -24.6275
+    longitude: -70.4044
+    elevation: 2635
+    timezone: "America/Santiago"
+    description: "ESO VLT 8.2m telescopes"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 89.0
+      min_hour_angle: -5.5
+      max_hour_angle: 5.5
+
+  gemini_south:
+    name: "Gemini South"
+    latitude: -30.2407
+    longitude: -70.7367
+    elevation: 2722
+    timezone: "America/Santiago"
+    description: "Gemini 8.1m telescope at Cerro Pachon"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 85.0
+      min_hour_angle: -5.5
+      max_hour_angle: 5.5
+
+  ctio:
+    name: "Cerro Tololo Inter-American Observatory"
+    latitude: -30.1653
+    longitude: -70.8148
+    elevation: 2207
+    timezone: "America/Santiago"
+    description: "CTIO 4m Blanco telescope"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 87.0
+
+  las_campanas:
+    name: "Las Campanas Observatory"
+    latitude: -29.0089
+    longitude: -70.6920
+    elevation: 2380
+    timezone: "America/Santiago"
+    description: "Magellan 6.5m telescopes"
+    limits:
+      min_altitude: 15.0
+      max_altitude: 89.0
+      min_hour_angle: -5.0
+      max_hour_angle: 5.0
+
+  # ============================================================================
+  # North American Observatories
+  # ============================================================================
+
+  kitt_peak:
+    name: "Kitt Peak National Observatory"
+    latitude: 31.9633
+    longitude: -111.6006
+    elevation: 2096
+    timezone: "US/Arizona"
+    description: "KPNO 4m Mayall telescope"
+    limits:
+      min_altitude: 15.0
+      max_altitude: 88.0
+
+  mcdonald:
+    name: "McDonald Observatory"
+    latitude: 30.6717
+    longitude: -104.0217
+    elevation: 2070
+    timezone: "US/Central"
+    description: "Hobby-Eberly 9.2m telescope"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 70.0  # HET has limited altitude range
+
+  lick:
+    name: "Lick Observatory (Shane 3m)"
+    latitude: 37.3414
+    longitude: -121.6429
+    elevation: 1283
+    timezone: "US/Pacific"
+    description: "Shane 3m telescope with Kast spectrograph"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 87.0
+      min_hour_angle: -5.667  # -5h 40m (east limit)
+      max_hour_angle: 3.75    # +3h 45m (west limit)
+      # Dec limits: -30 to +83 deg (not enforced in airmass plot)
+
+  palomar:
+    name: "Palomar Observatory"
+    latitude: 33.3564
+    longitude: -116.8650
+    elevation: 1712
+    timezone: "US/Pacific"
+    description: "Hale 5m telescope"
+    limits:
+      min_altitude: 18.0
+      max_altitude: 88.0
+
+  # ============================================================================
+  # European Observatories
+  # ============================================================================
+
+  la_palma:
+    name: "Roque de los Muchachos"
+    latitude: 28.7606
+    longitude: -17.8816
+    elevation: 2396
+    timezone: "Atlantic/Canary"
+    description: "GTC 10.4m, WHT 4.2m, INT 2.5m"
+    limits:
+      min_altitude: 15.0
+      max_altitude: 89.0
+      min_hour_angle: -5.5
+      max_hour_angle: 5.5
+
+  calar_alto:
+    name: "Calar Alto Observatory"
+    latitude: 37.2236
+    longitude: -2.5461
+    elevation: 2168
+    timezone: "Europe/Madrid"
+    description: "CAHA 3.5m telescope"
+    limits:
+      min_altitude: 20.0
+      max_altitude: 87.0
+
+  # ============================================================================
+  # Australian Observatories
+  # ============================================================================
+
+  sso:
+    name: "Siding Spring Observatory"
+    latitude: -31.2733
+    longitude: 149.0617
+    elevation: 1165
+    timezone: "Australia/Sydney"
+    description: "AAT 3.9m, ANU 2.3m telescopes"
+    limits:
+      min_altitude: 15.0
+      max_altitude: 89.0
+
+  # ============================================================================
+  # South African Observatories
+  # ============================================================================
+
+  saao:
+    name: "South African Astronomical Observatory"
+    latitude: -32.3783
+    longitude: 20.8106
+    elevation: 1798
+    timezone: "Africa/Johannesburg"
+    description: "SALT 11m telescope at Sutherland"
+    limits:
+      min_altitude: 35.0
+      max_altitude: 60.0  # SALT has limited altitude range
+      min_hour_angle: -3.5
+      max_hour_angle: 3.5
+
+  # ============================================================================
+  # Space-based (for reference, no pointing limits)
+  # ============================================================================
+
+  hubble:
+    name: "Hubble Space Telescope"
+    latitude: 0.0
+    longitude: 0.0
+    elevation: 540000
+    timezone: "UTC"
+    description: "HST - no ground-based limits apply"
+    limits:
+      min_altitude: -90.0  # Can observe anywhere
+      max_altitude: 90.0

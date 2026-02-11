@@ -1,0 +1,13 @@
+# Sample target list for SkyCalc
+# Columns: name, ra, dec, priority, magnitude, type, notes
+name,ra,dec,priority,magnitude,type,notes
+M31,00:42:44.3,+41:16:09,1,3.4,Galaxy,Andromeda Galaxy
+M42,05:35:17.3,-05:23:28,1,4.0,Nebula,Orion Nebula
+M13,16:41:41.2,+36:27:35,2,5.8,Globular,Hercules Cluster
+M51,13:29:52.7,+47:11:43,2,8.4,Galaxy,Whirlpool Galaxy
+M1,05:34:31.9,+22:00:52,3,8.4,SNR,Crab Nebula
+M57,18:53:35.1,+33:01:45,2,8.8,PN,Ring Nebula
+M104,12:39:59.4,-11:37:23,3,8.0,Galaxy,Sombrero Galaxy
+NGC7000,20:58:47.0,+44:19:48,3,4.0,Nebula,North America Nebula
+Vega,18:36:56.3,+38:47:01,1,0.0,Star,Alpha Lyrae
+Betelgeuse,05:55:10.3,+07:24:25,1,0.5,Star,Alpha Orionis
