@@ -272,9 +272,9 @@ def register_callbacks(app):
             yaxis_title="Airmass",
             font=dict(size=14),  # Base font size
             yaxis=dict(
-                autorange="reversed",  # Airmass increases downward
-                range=[yaxis_min if yaxis_min is not None else 1.0,
-                       yaxis_max if yaxis_max is not None else 10.0],
+                # Reversed range: max first, min second (so low airmass at top)
+                range=[yaxis_max if yaxis_max is not None else 10.0,
+                       yaxis_min if yaxis_min is not None else 1.0],
                 gridcolor="rgba(100,100,100,0.4)",
                 dtick=yaxis_step if yaxis_step is not None else 2.0,
                 tick0=yaxis_min if yaxis_min is not None else 1.0,
