@@ -220,9 +220,9 @@ def register_callbacks(app):
             except (ValueError, IndexError):
                 pass  # Keep default sunset time
 
-        # Set plot range: 1 hour before start, 13 hours after start (14 hour window)
+        # Set plot range: 1 hour before start, 15 hours after start (16 hour window)
         plot_start = time_start - 1 * u.hour
-        plot_end = time_start + 13 * u.hour
+        plot_end = time_start + 15 * u.hour
 
         # Convert to datetime for plotting
         start_dt = plot_start.datetime
@@ -284,6 +284,12 @@ def register_callbacks(app):
                 font=dict(size=12),
             ),
             hovermode="x unified",
+            hoverlabel=dict(
+                bgcolor="rgba(30, 30, 30, 0.95)",
+                font_size=13,
+                font_color="white",
+                bordercolor="rgba(100, 100, 100, 0.8)",
+            ),
         )
 
         # Add twilight bands if enabled
@@ -341,12 +347,12 @@ def register_callbacks(app):
                             name=target_data["name"],
                             line=dict(color=color, width=2),
                             hovertemplate=(
-                                f"<b>{target_data['name']}</b><br>"
-                                "Time: %{x|%H:%M}<br>"
-                                "Airmass: %{y:.2f}<br>"
-                                "Alt: %{customdata[0]:.1f}°<br>"
-                                "Az: %{customdata[1]:.1f}°<br>"
-                                "HA: %{customdata[2]:.2f}h"
+                                f"<b style='color:white;font-size:14px'>{target_data['name']}</b><br>"
+                                "<span style='color:#eee'>Time: %{x|%H:%M}</span><br>"
+                                "<span style='color:#eee'>Airmass: %{y:.2f}</span><br>"
+                                "<span style='color:#eee'>Alt: %{customdata[0]:.1f}°</span><br>"
+                                "<span style='color:#eee'>Az: %{customdata[1]:.1f}°</span><br>"
+                                "<span style='color:#eee'>HA: %{customdata[2]:.2f}h</span>"
                                 "<extra></extra>"
                             ),
                             customdata=np.column_stack([
@@ -383,10 +389,10 @@ def register_callbacks(app):
                                 opacity=0.5,
                                 showlegend=False,
                                 hovertemplate=(
-                                    f"<b>{target_data['name']}</b> (OUTSIDE LIMITS)<br>"
-                                    "Time: %{x|%H:%M}<br>"
-                                    "Airmass: %{y:.2f}<br>"
-                                    "HA: %{customdata[0]:.2f}h<br>"
+                                    f"<b style='color:#ffaa66;font-size:14px'>{target_data['name']}</b> <span style='color:#ff6b6b'>(OUTSIDE LIMITS)</span><br>"
+                                    "<span style='color:#eee'>Time: %{x|%H:%M}</span><br>"
+                                    "<span style='color:#eee'>Airmass: %{y:.2f}</span><br>"
+                                    "<span style='color:#eee'>HA: %{customdata[0]:.2f}h</span><br>"
                                     "<span style='color:#ff6b6b'>%{customdata[1]}</span>"
                                     "<extra></extra>"
                                 ),
@@ -411,10 +417,10 @@ def register_callbacks(app):
                     name="Moon",
                     line=dict(color="silver", width=2, dash="dash"),
                     hovertemplate=(
-                        "<b>Moon</b><br>"
-                        "Time: %{x|%H:%M}<br>"
-                        "Alt: %{customdata[0]:.1f}°<br>"
-                        "Illum: %{customdata[1]:.0%}"
+                        "<b style='color:silver;font-size:14px'>Moon</b><br>"
+                        "<span style='color:#eee'>Time: %{x|%H:%M}</span><br>"
+                        "<span style='color:#eee'>Alt: %{customdata[0]:.1f}°</span><br>"
+                        "<span style='color:#eee'>Illum: %{customdata[1]:.0%}</span>"
                         "<extra></extra>"
                     ),
                     customdata=np.column_stack([
