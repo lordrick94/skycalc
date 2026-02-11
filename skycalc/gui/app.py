@@ -128,17 +128,93 @@ sidebar = dbc.Card(
                     labelStyle={"display": "block"},
                     className="mb-3",
                 ),
-                # Airmass limit slider
-                html.Label("Max Airmass Display", className="fw-bold"),
-                dcc.Slider(
-                    id="airmass-limit",
-                    min=2.0,
-                    max=10.0,
-                    step=1.0,
-                    value=10.0,
-                    marks={i: str(i) for i in [2, 4, 6, 8, 10]},
-                    className="mb-3",
-                ),
+                html.Hr(),
+                # Plot Options
+                html.Label("Plot Options", className="fw-bold"),
+                # Y-axis controls
+                html.Div([
+                    html.Label("Y-Axis (Airmass)", className="small text-muted"),
+                    dbc.Row([
+                        dbc.Col([
+                            html.Label("Min", className="small"),
+                            dbc.Input(
+                                id="yaxis-min",
+                                type="number",
+                                value=1,
+                                min=1,
+                                max=5,
+                                step=0.5,
+                                size="sm",
+                            ),
+                        ], width=4),
+                        dbc.Col([
+                            html.Label("Max", className="small"),
+                            dbc.Input(
+                                id="yaxis-max",
+                                type="number",
+                                value=10,
+                                min=2,
+                                max=20,
+                                step=1,
+                                size="sm",
+                            ),
+                        ], width=4),
+                        dbc.Col([
+                            html.Label("Step", className="small"),
+                            dbc.Input(
+                                id="yaxis-step",
+                                type="number",
+                                value=2,
+                                min=0.5,
+                                max=5,
+                                step=0.5,
+                                size="sm",
+                            ),
+                        ], width=4),
+                    ], className="mb-2"),
+                ], className="mb-2"),
+                # X-axis controls
+                html.Div([
+                    html.Label("X-Axis (Time Range)", className="small text-muted"),
+                    dbc.Row([
+                        dbc.Col([
+                            html.Label("Hrs Before", className="small"),
+                            dbc.Input(
+                                id="xaxis-before",
+                                type="number",
+                                value=1,
+                                min=0,
+                                max=6,
+                                step=1,
+                                size="sm",
+                            ),
+                        ], width=4),
+                        dbc.Col([
+                            html.Label("Hrs After", className="small"),
+                            dbc.Input(
+                                id="xaxis-after",
+                                type="number",
+                                value=15,
+                                min=6,
+                                max=24,
+                                step=1,
+                                size="sm",
+                            ),
+                        ], width=4),
+                        dbc.Col([
+                            html.Label("Tick (min)", className="small"),
+                            dbc.Input(
+                                id="xaxis-tick-step",
+                                type="number",
+                                value=30,
+                                min=15,
+                                max=120,
+                                step=15,
+                                size="sm",
+                            ),
+                        ], width=4),
+                    ], className="mb-2"),
+                ], className="mb-3"),
             ],
         ),
     ],

@@ -153,7 +153,12 @@ def register_callbacks(app):
         Input("start-time", "value"),
         Input("target-checklist", "value"),
         Input("display-options", "value"),
-        Input("airmass-limit", "value"),
+        Input("yaxis-min", "value"),
+        Input("yaxis-max", "value"),
+        Input("yaxis-step", "value"),
+        Input("xaxis-before", "value"),
+        Input("xaxis-after", "value"),
+        Input("xaxis-tick-step", "value"),
         State("targets-store", "data"),
     )
     def update_airmass_plot(
@@ -162,7 +167,12 @@ def register_callbacks(app):
         start_time_str,
         selected_targets,
         display_options,
-        airmass_limit,
+        yaxis_min,
+        yaxis_max,
+        yaxis_step,
+        xaxis_before,
+        xaxis_after,
+        xaxis_tick_step,
         targets_data,
     ):
         """Update the airmass plot."""
@@ -220,23 +230,27 @@ def register_callbacks(app):
             except (ValueError, IndexError):
                 pass  # Keep default sunset time
 
-        # Set plot range: 1 hour before start, 15 hours after start (16 hour window)
-        plot_start = time_start - 1 * u.hour
-        plot_end = time_start + 15 * u.hour
+        # Set plot range based on user settings
+        hours_before = xaxis_before if xaxis_before is not None else 1
+        hours_after = xaxis_after if xaxis_after is not None else 15
+        plot_start = time_start - hours_before * u.hour
+        plot_end = time_start + hours_after * u.hour
 
         # Convert to datetime for plotting
         start_dt = plot_start.datetime
         end_dt = plot_end.datetime
 
-        # Generate 30-minute tick values for grid lines
-        # Round to nearest 30 min
+        # Generate tick values based on user-specified step
+        tick_step_mins = xaxis_tick_step if xaxis_tick_step is not None else 30
+        tick_step_mins = int(tick_step_mins)
+
+        # Round to nearest tick step
         tick_start = start_dt.replace(second=0, microsecond=0)
-        if tick_start.minute < 30:
-            tick_start = tick_start.replace(minute=0)
-        else:
-            tick_start = tick_start.replace(minute=30)
+        mins = tick_start.minute
+        rounded_mins = (mins // tick_step_mins) * tick_step_mins
+        tick_start = tick_start.replace(minute=rounded_mins)
         if tick_start < start_dt:
-            tick_start = tick_start + timedelta(minutes=30)
+            tick_start = tick_start + timedelta(minutes=tick_step_mins)
 
         tick_vals = []
         tick_text = []
@@ -245,7 +259,7 @@ def register_callbacks(app):
             tick_vals.append(current)
             # Show HH:MM for all ticks
             tick_text.append(current.strftime("%H:%M"))
-            current = current + timedelta(minutes=30)
+            current = current + timedelta(minutes=tick_step_mins)
 
         # Create figure with proper time axis
         fig = go.Figure()
@@ -259,10 +273,11 @@ def register_callbacks(app):
             font=dict(size=14),  # Base font size
             yaxis=dict(
                 autorange="reversed",  # Airmass increases downward
-                range=[1.0, airmass_limit],
+                range=[yaxis_min if yaxis_min is not None else 1.0,
+                       yaxis_max if yaxis_max is not None else 10.0],
                 gridcolor="rgba(100,100,100,0.4)",
-                dtick=2.0,  # Airmass grid every 2
-                tick0=1.0,  # Start ticks at 1
+                dtick=yaxis_step if yaxis_step is not None else 2.0,
+                tick0=yaxis_min if yaxis_min is not None else 1.0,
                 tickfont=dict(size=13),
                 title_font=dict(size=15),
             ),
@@ -295,11 +310,11 @@ def register_callbacks(app):
         # Add twilight bands if enabled
         if "twilight" in display_options:
             twilights = compute_twilight_times(observer, obs_time)
-            _add_twilight_bands(fig, twilights, start_dt, end_dt, airmass_limit)
+            _add_twilight_bands(fig, twilights, start_dt, end_dt, yaxis_max if yaxis_max else 10.0)
 
         # Add pointing limit shading if enabled
         if "limits" in display_options:
-            _add_limit_shading(fig, telescope, start_dt, end_dt, airmass_limit)
+            _add_limit_shading(fig, telescope, start_dt, end_dt, yaxis_max if yaxis_max else 10.0)
 
         # Add current time line if enabled
         if "now" in display_options:
